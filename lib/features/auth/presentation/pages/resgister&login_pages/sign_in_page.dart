@@ -9,34 +9,33 @@ import 'package:spotify_clone/core/common/widgets/loader/loader.dart';
 import 'package:spotify_clone/core/common/widgets/text_feild/text_form_feild.dart';
 import 'package:spotify_clone/core/utils/snakbar.dart';
 import 'package:spotify_clone/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
-import 'package:spotify_clone/features/auth/presentation/pages/resgister&login_pages/sign_in_page.dart';
+import 'package:spotify_clone/features/auth/presentation/pages/resgister&login_pages/register_page.dart';
+import 'package:spotify_clone/features/home/presentation/pages/home_page.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _SignInPageState extends State<SignInPage> {
   // Form key
   final formKey = GlobalKey<FormState>();
 
   // Text controllers
-  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  // isObscureText value
-  bool isObscure = true;
-
   @override
   void dispose() {
-    nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
   }
+
+  // isObscureText value
+  bool isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +52,8 @@ class _RegisterPageState extends State<RegisterPage> {
           if (state is AuthFailureState) {
             snakbar(context, state.error);
           } else if (state is AuthSuccessState) {
-            snakbar(context, "Registration successful. Please sign in.");
             Navigator.push(
-                context, MaterialPageRoute(builder: (_) => const SignInPage()));
+                context, MaterialPageRoute(builder: (_) => const HomePage()));
           }
         },
         builder: (context, state) {
@@ -63,10 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
             return const Loader();
           }
           return SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(
-              vertical: 30,
-              horizontal: 30,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
             child: Form(
               key: formKey,
               child: Column(
@@ -74,7 +69,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   const Align(
                     alignment: Alignment.center,
                     child: Text(
-                      'Register',
+                      'Sign In',
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -84,13 +79,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const SizedBox(
                     height: 40,
-                  ),
-                  MyTextFormFeild(
-                    hintText: 'Full Name',
-                    controller: nameController,
-                  ),
-                  const SizedBox(
-                    height: 20,
                   ),
                   MyTextFormFeild(
                     hintText: 'Email',
@@ -124,15 +112,17 @@ class _RegisterPageState extends State<RegisterPage> {
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         context.read<AuthBloc>().add(
-                              AuthRegisterUserEvent(
-                                name: nameController.text.trim(),
+                              AuthUserSignInEvent(
                                 email: emailController.text.trim(),
                                 password: passwordController.text.trim(),
                               ),
                             );
                       }
                     },
-                    btnText: 'Create Account',
+                    btnText: 'Sign In',
+                  ),
+                  const SizedBox(
+                    height: 35,
                   ),
                 ],
               ),
@@ -147,7 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
           text: TextSpan(
             children: [
               const TextSpan(
-                text: 'Do You Have An Account ? ',
+                text: 'Not A Member ? ',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
@@ -160,11 +150,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const SignInPage(),
+                        builder: (_) => const RegisterPage(),
                       ),
                     );
                   },
-                text: 'Sign In',
+                text: 'Register Now',
                 style: const TextStyle(
                   color: Colors.blueAccent,
                   fontSize: 16,
