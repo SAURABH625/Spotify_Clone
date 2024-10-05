@@ -22,7 +22,7 @@ class SongDetailsCard extends StatelessWidget {
               itemBuilder: (context, index) {
                 final songDetails = state.songDetails[index];
                 final imageUrl =
-                    'https://firebasestorage.googleapis.com/v0/b/spotifyclone-244fd.appspot.com/o/Covers%2F${Uri.encodeComponent(songDetails.artist + ' - ' + songDetails.title)}.jpg?alt=media';
+                    'https://firebasestorage.googleapis.com/v0/b/spotifyclone-244fd.appspot.com/o/Covers%2F${Uri.encodeComponent('${songDetails.artist} - ${songDetails.title}')}.jpg?alt=media';
 
                 return GestureDetector(
                   onTap: () {
@@ -30,8 +30,8 @@ class SongDetailsCard extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) => SongPlayerPage(
-                            // songEntity: state.songDetails[index],
-                            ),
+                          songEntity: state.songDetails[index],
+                        ),
                       ),
                     );
                   },
@@ -52,7 +52,7 @@ class SongDetailsCard extends StatelessWidget {
                                   errorBuilder: (context, error, stackTrace) {
                                     print(
                                         'Image.network failed to load: $error'); // Image.network error logging
-                                    return Icon(Icons.error);
+                                    return const Icon(Icons.error);
                                   },
                                 ),
                               ),
@@ -63,13 +63,13 @@ class SongDetailsCard extends StatelessWidget {
                                   width: 40,
                                   transform:
                                       Matrix4.translationValues(10, 10, 0),
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Color(0xffE6E6E6),
+                                  ),
                                   child: Icon(
                                     Icons.play_arrow_rounded,
                                     color: Color(0xff959595),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Color(0xffE6E6E6),
                                   ),
                                 ),
                               ),
@@ -81,7 +81,7 @@ class SongDetailsCard extends StatelessWidget {
                         ),
                         Text(
                           songDetails.title,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
                           ),
@@ -91,7 +91,7 @@ class SongDetailsCard extends StatelessWidget {
                         ),
                         Text(
                           songDetails.artist,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 14,
                           ),

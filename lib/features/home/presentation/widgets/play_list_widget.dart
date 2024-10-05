@@ -4,6 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:spotify_clone/core/common/widgets/loader/loader.dart';
 import 'package:spotify_clone/core/theme/app_colors.dart';
 import 'package:spotify_clone/features/home/presentation/bloc/cubit/cubit/song_details_cubit.dart';
+import 'package:spotify_clone/features/song_player&fav/presentation/bloc/cubit/fav_song_details_cubit.dart/fav_song_details_cubit.dart';
+
 import 'package:spotify_clone/features/song_player&fav/presentation/pages/song_player_page.dart';
 
 class PlayListWidget extends StatefulWidget {
@@ -16,8 +18,16 @@ class PlayListWidget extends StatefulWidget {
 class _PlayListWidgetState extends State<PlayListWidget> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => GetIt.instance<SongDetailsCubit>()..fetchSongDetails(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<SongDetailsCubit>(
+          create: (_) => GetIt.instance<SongDetailsCubit>()..fetchSongDetails(),
+        ),
+        // Add more BlocProviders here if you have other cubits/blocs
+        BlocProvider<FavSongDetailsCubit>(
+          create: (_) => GetIt.instance<FavSongDetailsCubit>(),
+        ),
+      ],
       child: BlocBuilder<SongDetailsCubit, SongDetailsState>(
         builder: (context, state) {
           if (state is SongDetailsLoadingState) {
@@ -25,9 +35,9 @@ class _PlayListWidgetState extends State<PlayListWidget> {
           } else if (state is SongDetailsSuccessState) {
             return Column(
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text(
                       'Playlist',
                       style: TextStyle(
@@ -53,15 +63,14 @@ class _PlayListWidgetState extends State<PlayListWidget> {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     final song = state.songDetails[index];
-                    print(state.songDetails.length);
                     return GestureDetector(
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (BuildContext context) => SongPlayerPage(
-                                // songEntity: state.songDetails[index],
-                                ),
+                              songEntity: state.songDetails[index],
+                            ),
                           ),
                         );
                       },
@@ -121,8 +130,11 @@ class _PlayListWidgetState extends State<PlayListWidget> {
                               IconButton(
                                 onPressed: () {
                                   print(song.songId);
+                                  context
+                                      .read<FavSongDetailsCubit>()
+                                      .getFavSongDetails(song.songId);
                                 },
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.favorite_border_rounded,
                                   color: AppColors.darkGrey,
                                 ),

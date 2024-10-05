@@ -6,11 +6,11 @@ class BasicAppButton extends StatelessWidget {
   final String btnText;
   final double? height;
   const BasicAppButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     required this.btnText,
     this.height,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

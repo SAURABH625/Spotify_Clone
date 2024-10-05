@@ -7,11 +7,11 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? action;
   final bool hideBackBtn;
   const BasicAppBar({
-    Key? key,
+    super.key,
     this.title,
     this.action,
     this.hideBackBtn = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -17,6 +17,7 @@ class ThemeCubit extends HydratedCubit<ThemeMode> {
       default:
         ThemeMode.system;
     }
+    return null;
   }
 
   @override

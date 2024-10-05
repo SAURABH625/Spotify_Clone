@@ -7,12 +7,12 @@ class MyTextFormFeild extends StatelessWidget {
   final Widget? sufixIcon; // Make prefixIcon nullable
 
   const MyTextFormFeild({
-    Key? key,
+    super.key,
     required this.hintText,
     required this.controller,
     this.isObscureText = false,
     this.sufixIcon, // Updated to be optional
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
