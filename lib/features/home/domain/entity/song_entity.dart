@@ -6,6 +6,7 @@ class SongEntity {
   final String artist;
   final num duration;
   final Timestamp releaseDate;
+  final bool isFav;
 
   SongEntity({
     required this.songId,
@@ -13,5 +14,6 @@ class SongEntity {
     required this.artist,
     required this.duration,
     required this.releaseDate,
+    this.isFav = false, // Default value set here
   });
 }

@@ -6,6 +6,7 @@ class SongModel {
   final String artist;
   final num duration;
   final Timestamp releaseDate;
+  final bool isFav; // Add isFav field
 
   SongModel({
     required this.songId,
@@ -13,6 +14,7 @@ class SongModel {
     required this.artist,
     required this.duration,
     required this.releaseDate,
+    this.isFav = false, // Default value set to false
   });
 
   SongModel copyWith({
@@ -21,6 +23,7 @@ class SongModel {
     String? artist,
     num? duration,
     Timestamp? releaseDate,
+    bool? isFav, // Add isFav to copyWith method
   }) {
     return SongModel(
       songId: songId ?? this.songId,
@@ -28,6 +31,7 @@ class SongModel {
       artist: artist ?? this.artist,
       duration: duration ?? this.duration,
       releaseDate: releaseDate ?? this.releaseDate,
+      isFav: isFav ?? this.isFav, // Copy isFav value if provided
     );
   }
 
@@ -38,6 +42,7 @@ class SongModel {
       'artist': artist,
       'duration': duration,
       'releaseDate': releaseDate,
+      'isFav': isFav, // Add isFav to toJson method
     };
   }
 
@@ -48,6 +53,8 @@ class SongModel {
       artist: json['artist'] as String,
       duration: json['duration'] as num,
       releaseDate: json['releaseDate'] as Timestamp,
+      isFav: json['isFav'] as bool? ??
+          false, // Parse isFav from JSON, default to false if missing
     );
   }
 }
