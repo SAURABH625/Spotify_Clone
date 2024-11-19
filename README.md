@@ -7,15 +7,15 @@ A feature-rich music streaming application built with Flutter that implements cl
 This project demonstrates full-stack mobile development expertise, focusese on scalable architecture, efficient state management, and smooth user experience.
 
 <p float="left">
-  <img src="screenshots/Screenshot_SplashScreen.png" width="250" />
-  <img src="screenshots/Screenshot_StartScreen.png" width="250" />
-  <img src="screenshots/Screenshot_SelectTheme.png" width="250" />
-  <img src="screenshots/Screenshot_Register&Login.png" width="250" />
-  <img src="screenshots/Screenshot_Register.png" width="250" />
-  <img src="screenshots/Screenshot_Login.png" width="250" />
-  <img src="screenshots/Screenshot_HomePage.png" width="250" />
-  <img src="screenshots/Screenshot_UserProfile.png" width="250" />
-  <img src="screenshots/Screenshot_MusicPlayer.png" width="250" />
+  <img src="assets/screenshots/Screenshot_SplashScreen.png" width="250" />
+  <img src="assets/screenshots/Screenshot_StartScreen.png" width="250" />
+  <img src="assets/screenshots/Screenshot_SelectTheme.png" width="250" />
+  <img src="assets/screenshots/Screenshot_Register&Login.png" width="250" />
+  <img src="assets/screenshots/Screenshot_Register.png" width="250" />
+  <img src="assets/screenshots/Screenshot_Login.png" width="250" />
+  <img src="assets/screenshots/Screenshot_HomePage.png" width="250" />
+  <img src="assets/screenshots/Screenshot_UserProfile.png" width="250" />
+  <img src="assets/screenshots/Screenshot_MusicPlayer.png" width="250" />
 </p>
 
 🎯 Project Overview
