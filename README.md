@@ -14,7 +14,7 @@ This project demonstrates full-stack mobile development expertise, focusese on s
   <img src="assets/screenshots/Screenshot_Register.png" width="250" />
   <img src="assets/screenshots/Screenshot_Login.png" width="250" />
   <img src="assets/screenshots/Screenshot_HomePage.png" width="250" />
-  <img src="assets/screenshots/Screenshot_SUserProfile.png" width="250" />
+  <img src="assets/screenshots/Screenshot_S_UserProfile.png" width="250" />
   <img src="assets/screenshots/Screenshot_MusicPlayer.png" width="250" />
 </p>
 
