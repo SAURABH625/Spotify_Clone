@@ -44,8 +44,16 @@ class FavSongDatabaseImpl implements FavSongDatabase {
     try {
       // Getting user's fav song id's
       final userDoc = await firestore.collection('Users').doc(userId).get();
+      if (!userDoc.exists) {
+        return [];
+      }
       final userData = userDoc.data()!;
-      final favSongs = userData['favSongs'];
+      final favSongs = userData['favSongs'] ?? [];
+
+      // If no favorite songs, return empty list
+      if (favSongs.isEmpty) {
+        return [];
+      }
 
       // Fetching favSongDetails
       final res = await firestore
@@ -62,7 +70,7 @@ class FavSongDatabaseImpl implements FavSongDatabase {
             artist: songData['artist'],
             duration: songData['duration'],
             releaseDate: songData['releaseDate'],
-            isFav: true,
+            isFav: favSongs.contains(doc.id),
           );
         },
       ).toList();
